@@ -10,7 +10,7 @@ Resources:
         - Statement:
           - Effect: Allow
             Action:
-              - ses:CreateEmailTemplate
+              - ses:CreateTemplate
             Resource: "*"
 Outputs:
   LambdaARN:
