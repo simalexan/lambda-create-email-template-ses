@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  CreateEmailTemplate:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Action:
+              - ses:CreateEmailTemplate
+            Resource: "*"
+Outputs:
+  LambdaARN:
+    Value: !GetAtt CreateEmailTemplate.Arn
+    Description: The ARN of the LambdaEmailer
