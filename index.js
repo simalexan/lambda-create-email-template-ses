@@ -6,7 +6,7 @@ exports.handler = (event) => {
   if (!event.body) {
     return Promise.resolve(MISSING_PARAMS);
   }
-  const templateData = JSON.parse(event.body);
+  const templateData = event.body;
 
   if (!templateData.templateName || !templateData.subject) {
     return Promise.resolve(MISSING_PARAMS);
@@ -19,11 +19,11 @@ exports.handler = (event) => {
     }
   }
   if (templateData.html) {
-    templateParams.HtmlPart = templateData.html;
+    templateParams.Template.HtmlPart = templateData.html;
   }
 
   if (templateData.text) {
-    templateParams.TextPart = templateData.text;
+    templateParams.Template.TextPart = templateData.text;
   }
 
   return SES.createTemplate(templateParams).promise()
