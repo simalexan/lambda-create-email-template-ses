@@ -1,11 +1,11 @@
 
-# Lambda (Create Template) -> SES (Simple Email Service)
+# Lambda (Create Email Template) -> SES (Simple Email Service)
 
 ## Description
 
 This is a serverless component consisting of:
 
-- a Lambda that creates an email template for sending templated emails. It needs at least 3 parameters:
+- a Lambda that creates an SES email template for sending templated emails. It needs at least 3 parameters:
 
   - `templateName`
   - `subject`
