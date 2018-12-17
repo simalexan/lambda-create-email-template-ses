@@ -9,23 +9,25 @@ Resources:
       Role: !GetAtt CreateEmailTemplateRole.Arn
   CreateEmailTemplateRole:
     Type: AWS::IAM::Role
-    AssumeRolePolicyDocument:
-      Version: '2012-10-17'
-      Statement:
-      - Effect: Allow
-        Principal:
-          Service:
-          - lambda.amazonaws.com
-        Action: 
-        - sts:AssumeRole
-    Policies:
-      - PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - ses:CreateTemplate
-            Resource: '*'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action: 
+          - sts:AssumeRole
+      Policies:
+        - PolicyName: 'create-template'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - ses:CreateTemplate
+              Resource: '*'
 Outputs:
   LambdaARN:
     Value: !GetAtt CreateEmailTemplate.Arn
