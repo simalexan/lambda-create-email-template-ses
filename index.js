@@ -3,6 +3,7 @@ const AWS = require('aws-sdk'),
   MISSING_PARAMS = 'Please specify template parameters: templateName, subject';
 
 exports.handler = (event) => {
+  console.log('FUNCTION INVOKED!')
   if (!event.body) {
     return Promise.resolve(MISSING_PARAMS);
   }

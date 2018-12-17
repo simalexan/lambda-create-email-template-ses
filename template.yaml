@@ -26,12 +26,21 @@ Resources:
             Statement:
             - Effect: Allow
               Action:
-              - ses:CreateTemplate
+                - ses:CreateTemplate
               Resource: '*'
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: 'arn:aws:logs:*:*:*'
 Outputs:
   LambdaARN:
     Value: !GetAtt CreateEmailTemplate.Arn
     Description: The ARN of the CreateEmailTemplate
+  LambdaName:
+    Value: !Ref CreateEmailTemplate
+    Description: The Name of the CreateEmailTemplate
   Role:
     Value: !Ref CreateEmailTemplateRole
     Description: The name of the CreateEmailTemplate Role
