@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "package": "aws cloudformation package --template-file template.yaml --output-template-file output.yaml --s3-bucket lambda-create-email-template-ses-bucket",
-    "deploy": "aws cloudformation deploy --template-file output.yaml --stack-name lambda-create-email-template-ses --capabilities CAPABILITY_IAM",
+    "package": "aws cloudformation package --template-file template.yaml --output-template-file output.yaml --s3-bucket lambda-create-email-template-ses-attach-bucket",
+    "deploy": "aws cloudformation deploy --template-file output.yaml --stack-name lambda-create-email-template-attach-ses --capabilities CAPABILITY_IAM",
     "qd": "npm run package && npm run deploy",
-    "deploy:test": "aws cloudformation deploy --template-file output.yaml --stack-name lambda-create-email-template-ses --capabilities CAPABILITY_IAM"
+    "deploy:test": "aws cloudformation deploy --template-file output.yaml --stack-name lambda-create-email-template-attach-ses --capabilities CAPABILITY_IAM"
   },
   "keywords": [],
   "author": "Aleksandar Simovic <alexander.simovic@gmail.com>",

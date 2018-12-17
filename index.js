@@ -4,12 +4,12 @@ const AWS = require('aws-sdk'),
 
 exports.handler = (event) => {
   if (!event.body) {
-    return Promise.resolve(MISSING_PARAMS);
+    return Promise.resolve({statusCode: 200, body: MISSING_PARAMS});
   }
-  const templateData = event.body;
+  const templateData = JSON.parse(event.body);
 
   if (!templateData.templateName || !templateData.subject) {
-    return Promise.resolve(MISSING_PARAMS);
+    return Promise.resolve({statusCode: 200, body: MISSING_PARAMS});
   }
 
   const templateParams = {
@@ -27,9 +27,10 @@ exports.handler = (event) => {
   }
 
   return SES.createTemplate(templateParams).promise()
+    .then(() => ({statusCode: 200, body: ''}))
     .catch(err => {
       console.log(err);
       const errorResponse = `Error: Execution update, caused a SES error, please look at your logs.`;
-      return errorResponse;
+      return {statusCode: 400, body: errorResponse};
     });
 };
