@@ -3,11 +3,10 @@ const AWS = require('aws-sdk'),
   MISSING_PARAMS = 'Please specify template parameters: templateName, subject';
 
 exports.handler = (event) => {
-  console.log('FUNCTION INVOKED!')
   if (!event.body) {
     return Promise.resolve(MISSING_PARAMS);
   }
-  const templateData = event.body;
+  const templateData = JSON.parse(event.body);
 
   if (!templateData.templateName || !templateData.subject) {
     return Promise.resolve(MISSING_PARAMS);
@@ -28,6 +27,7 @@ exports.handler = (event) => {
   }
 
   return SES.createTemplate(templateParams).promise()
+    .then(() => ({statusCode: 200, body: ''}))
     .catch(err => {
       console.log(err);
       const errorResponse = `Error: Execution update, caused a SES error, please look at your logs.`;
