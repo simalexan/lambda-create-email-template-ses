@@ -6,13 +6,30 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs8.10
-      Policies:
-        - Statement:
+      Role: !GetAtt CreateEmailTemplateRole.Arn
+  CreateEmailTemplateRole:
+    Type: AWS::IAM::Role
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Principal:
+          Service:
+          - lambda.amazonaws.com
+        Action: 
+        - sts:AssumeRole
+    Policies:
+      - PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
           - Effect: Allow
             Action:
-              - ses:CreateTemplate
-            Resource: "*"
+            - ses:CreateTemplate
+            Resource: '*'
 Outputs:
   LambdaARN:
     Value: !GetAtt CreateEmailTemplate.Arn
-    Description: The ARN of the LambdaEmailer
+    Description: The ARN of the CreateEmailTemplate
+  Role:
+    Value: !Ref CreateEmailTemplateRole
+    Description: The name of the CreateEmailTemplate Role
